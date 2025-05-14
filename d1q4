@@ -1,0 +1,31 @@
+import java.lang.reflect.Method;
+
+class Employee {
+    private String name;
+    private int id;
+
+    public void work() {
+        System.out.println("Working...");
+    }
+
+    public void takeBreak() {
+        System.out.println("Taking a break...");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Employee emp = new Employee();
+        Class<?> cls = emp.getClass();
+
+        System.out.println("Full Class Name: " + cls.getName());
+        System.out.println("Simple Class Name: " + cls.getSimpleName());
+        System.out.println("Is Interface? " + cls.isInterface());
+
+        Method[] methods = cls.getDeclaredMethods();
+        System.out.println("Declared Methods:");
+        for (Method method : methods) {
+            System.out.println("- " + method.getName());
+        }
+    }
+}
