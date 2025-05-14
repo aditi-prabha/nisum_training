@@ -1,0 +1,17 @@
+class Parent {
+    static void displayMessage() {
+        System.out.println("This is a static method in the Parent class.");
+    }
+}
+class Child extends Parent {
+    void show() {
+      
+        Parent.displayMessage(); 
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Child c = new Child();
+        c.show(); 
+    }
+}
