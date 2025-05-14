@@ -1,0 +1,38 @@
+public class Main{
+    static class Student {
+        String name;
+        int rollNo;
+
+        Student(String name, int rollNo) {
+            this.name = name;
+            this.rollNo = rollNo;
+        }
+
+        public String toString() {
+            return "Student{name='" + name + "', rollNo=" + rollNo + "}";
+        }
+
+        public boolean equals(Object obj) {
+            if (this == obj) return true;
+            if (obj == null || getClass() != obj.getClass()) return false;
+            Student student = (Student) obj;
+            return rollNo == student.rollNo && name.equals(student.name);
+        }
+
+        public int hashCode() {
+            return name.hashCode() + rollNo;
+        }
+    }
+
+    public static void main(String[] args) {
+        Student s1 = new Student("Aditi", 101);
+        Student s2 = new Student("Aditi", 101);
+        Student s3 = new Student("Rahul", 102);
+
+        System.out.println("s1: " + s1);
+        System.out.println("s1 equals s2? " + s1.equals(s2));
+        System.out.println("s1 equals s3? " + s1.equals(s3));
+        System.out.println("s1 hashCode: " + s1.hashCode());
+        System.out.println("s2 hashCode: " + s2.hashCode());
+    }
+}
