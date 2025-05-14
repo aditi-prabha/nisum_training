@@ -1,0 +1,22 @@
+class Demo {
+    static int x = initializeX();
+
+    static {
+        System.out.println("Static block executed");
+    }
+
+    static int initializeX() {
+        System.out.println("Static variable x initialized");
+        return 10;
+    }
+
+    static void display() {
+        System.out.println("Static method called");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Demo.display();
+    }
+}
