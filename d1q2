@@ -1,0 +1,56 @@
+class Cart {
+    String itemName;
+    double itemValue;
+    int itemId;
+
+    // Constructor with basic validation
+    Cart(String itemName, double itemValue, int itemId) {
+        if (itemName == null || itemName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Item name cannot be empty.");
+        }
+        if (itemValue <= 0) {
+            throw new IllegalArgumentException("Item value must be positive.");
+        }
+        if (itemId <= 0) {
+            throw new IllegalArgumentException("Item ID must be positive.");
+        }
+
+        this.itemName = itemName;
+        this.itemValue = itemValue;
+        this.itemId = itemId;
+    }
+
+    public String toString() {
+        return "[" + itemId + "] " + itemName + " - ₹" + itemValue;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create cart items
+        Cart[] items = new Cart[3];
+        try {
+            items[0] = new Cart("Laptop", 50000, 101);
+            items[1] = new Cart("Mouse", 1200, 102);
+            items[2] = new Cart("Keyboard", 1500, 103);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error creating item: " + e.getMessage());
+        }
+
+        // Build summary
+        int itemsCount = 0;
+        double orderTotal = 0.0;
+
+        System.out.println("Order Summary:");
+        for (Cart item : items) {
+            if (item != null) {
+                System.out.println(item);
+                itemsCount++;
+                orderTotal += item.itemValue;
+            }
+        }
+
+        System.out.println("\nTotal Items: " + itemsCount);
+        System.out.println("Order Total: ₹" + orderTotal);
+    }
+}
