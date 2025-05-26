@@ -1,0 +1,59 @@
+package q3;
+
+import java.sql.*;
+import java.util.Scanner;
+
+class Student {
+    int stuid;
+    String fullname;
+    Date dob;
+    String email;
+    public Student(int stuid, String fullname, Date dob, String email) {
+        this.stuid = stuid;
+        this.fullname = fullname;
+        this.dob = dob;
+        this.email = email;
+    }
+    @Override
+    public String toString() {
+        return "Student [ID=" + stuid + ", Name=" + fullname + ", DOB=" + dob + ", Email=" + email + "]";
+    }
+}
+public class example6  {
+    public static void main(String[] args) throws SQLException {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter student ID");
+        int stuid = sc.nextInt();
+        q3.Student student = getStudentById(stuid);
+        if (student != null) {
+            System.out.println(student);
+        } else {
+            System.out.println("Student not found");
+        }
+    }
+    public static q3.Student getStudentById(int stuid) throws SQLException {
+        String url = "jdbc:mysql://localhost:3306/jdbc";
+        String username = "root";
+        String password = "Jaya@123";
+        String sql = "SELECT * FROM student WHERE stuid = ?";
+        Connection connection = DriverManager.getConnection(url, username, password);
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, stuid);
+        ResultSet rs = statement.executeQuery();
+        q3.Student student = null;
+        if (rs.next()) {
+            student = new q3.Student(
+                    rs.getInt("stuid"),
+                    rs.getString("fullname"),
+                    rs.getDate("dob"),
+                    rs.getString("email")
+            );
+        }
+        rs.close();
+        statement.close();
+        connection.close();
+        return student;
+    }
+}
+
+
